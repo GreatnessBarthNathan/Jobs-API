@@ -1,0 +1,208 @@
+openapi: 3.0.0
+info:
+  title: Jobs API
+  contact: {}
+  version: "1.0"
+servers:
+  - url: https://node-course-job-api.onrender.com/api/v1
+    variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: register user
+      operationId: registeruser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/registeruserrequest"
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: login
+      operationId: login
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/loginrequest"
+
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /jobs:
+    post:
+      tags:
+        - Jobs
+      summary: Create Job
+      operationId: CreateJob
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/CreateJobRequest"
+
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - Jobs
+      summary: Get All Jobs
+      operationId: GetAllJobs
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    parameters: []
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The job ID
+    get:
+      tags:
+        - Jobs
+      summary: Get Job
+      operationId: GetJob
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+
+    patch:
+      tags:
+        - Jobs
+      summary: Update Job
+      operationId: UpdateJob
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/UpdateJobRequest"
+
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - Jobs
+      summary: Delete Job
+      operationId: DeleteJob
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+
+components:
+  schemas:
+    registeruserrequest:
+      title: registeruserrequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+
+    loginrequest:
+      title: loginrequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+
+    CreateJobRequest:
+      title: CreateJobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+
+    UpdateJobRequest:
+      title: UpdateJobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Auth
+    description: ""
+  - name: Jobs
+    description: ""
